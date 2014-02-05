@@ -1,36 +1,65 @@
-<div class="header">
-  <ul class="nav nav-pills pull-right">
-    <li class="active"><a ng-href="#">Home</a></li>
-    <li><a ng-href="#">About</a></li>
-    <li><a ng-href="#">Contact</a></li>
-  </ul>
-  <h3 class="text-muted">etsy profit calculator</h3>
-</div>
 
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
-</div>
+<h1>Etsy profit Calculator</h1>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+<form name="etsyForm" data-ng-controller="MainCtrl">
+  <div class="row">
+    <label for="salesPrice">Sales Price</label>
+    <input type="text" name="salesPrice" data-ng-model="salesPrice" />  
+  </div>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+  <div class="row">
+    <label for="shippingLocation">Shipping Location</label>
+    <input type="radio" ng-model="shippingLocation" value="local">Same Country<br/>
+    <input type="radio" ng-model="shippingLocation" value="overseas">Overseas<br/>
+  </div>
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+  <div class="row">
+    <label for="payMethod">Payment Method</label>
+    <input type="radio" ng-model="payMethod" value="paypal">Paypal<br/>
+    <input type="radio" ng-model="payMethod" value="direct">Direct Checkout<br/>
+  </div>
+
+  <fieldset>
+    <legend>Costs</legend>
+    
+    <div class="row">
+      <label for="printCosts">Printing</label>
+      <input type="text" name="printCosts" data-ng-model="printCosts" />  
+    </div>
+    
+    <div class="row">
+      <label for="postageCosts">Postage</label>
+      <input type="text" name="postageCosts" data-ng-model="postageCosts" />  
+    </div>
+
+    <div class="row">
+      <p class="label">Etsy Fee</p>
+      <p><span data-ng-bind="etsyCosts | currency"></span> (<span data-ng-bind="etsyPercentage | percentage"></span>)</p>
+    </div>
+
+    <div class="row">
+      <p class="label">Listing Fee</p>
+      <p data-ng-bind="listingCosts | currency"></p>
+    </div>
+    
+    <div class="row">
+      <p class="label">Payment Processing Fee</p>
+      <p <span data-ng-bind="paymentCosts | currency"></span> (<span data-ng-bind="paymentPercentage | percentage"></span>)</p>
+    </div>
+
+    <div class="row">
+      <p>Profit earned</p>
+      <p data-ng-bind="profit | currency"></p>
+    </div>
+
+    <div class="row">
+      <button data-ng-click="calculate()">Calculate Profit</button>
+    </div>
+
+  </fieldset>
+  
+</form>
 
 <div class="footer">
-  <p>♥ from the Yeoman team</p>
+  <p>&copy; <a href="http://github.com/tgdev" target="_blank">TG DEV</a></p>
 </div>

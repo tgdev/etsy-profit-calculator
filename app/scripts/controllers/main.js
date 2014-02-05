@@ -5,21 +5,14 @@ angular.module('etsyProfitCalculatorApp')
 
     //set constants
     //=====================================
-    var etsyPercentage = 3.5,
-    	listingFee = 0.20;
-    	// paypalLocal = 2.3,
-    	// paypalInternational = 3.4,
-    	// directChecoutLocal = 3.5,
-    	// directCheckoutInternational = 4.0;
-
     var paymentOptions = {
     	paypal : {
     		local : 2.3,
-    		international : 3.4
+    		overseas : 3.4
     	},
     	direct : {
     		local: 3.5,
-    		international: 4.0
+    		overseas: 4.0
     	}
     };
 
@@ -27,47 +20,59 @@ angular.module('etsyProfitCalculatorApp')
 	// initialise view properties
 	//=====================================
 	$scope.salesPrice = 0;
-	$scope.shipLocation = "";
+	$scope.shippingLocation = "";
 	$scope.payMethod = "";
 	$scope.profit = 0;
+
+	//Percentages
+	$scope.etsyPercentage = 3.5;
+	$scope.paymentPercentage = 0.0;
+
 	
 	// Production costs
 	$scope.printCosts = 0;
 	$scope.postageCosts= 0;
 
 	// Fees
-	$scope.etsyFee = 0;
-	$scope.paymentFee = 0;
+	$scope.etsyCosts = 0;
+	$scope.listingCosts = 0.20
+	$scope.paymentCosts = 0;
+
 	$scope.totalCosts = 0;
 
 	
 	// App functions
 	//=====================================
-	setPaymentFee = function(location, payMethod) {
-		// if ( location === "local" && payMethod === "paypal" ) {
-		// 	$scope.paymentFee = $scope.salesPrice / paymentOptions.paypal.local;
-		// } else if ( location === "local" && payMethod === "direct" ) {
-		// 	$scope.paymentFee = $scope.salesPrice / paymentOptions.direct.local;
-		// } else if ( location === "international" && payMethod === "paypal" ) {
-		// 	$scope.paymentFee = $scope.salesPrice / paymentOptions.paypal.international;
-		// } else if ( location === "international" && payMethod === "direct" ) {
-		// 	$scope.paymentFee = $scope.salesPrice / paymentOptions.direct.international;
-		// }
-		$scope.paymentFee = $scope.salesPrice / paymentOptions. + payMethod + . + location;
+	calcPaymentFee = function(location, payMethod) {
+		if ( location === "local" && payMethod === "paypal" ) {
+			$scope.paymentCosts = $scope.salesPrice / paymentOptions.paypal.local;
+			$scope.paymentPercentage = paymentOptions.paypal.local;
+		} else if ( location === "local" && payMethod === "direct" ) {
+			$scope.paymentCosts = $scope.salesPrice / paymentOptions.direct.local;
+			$scope.paymentPercentage = paymentOptions.direct.local;
+		} else if ( location === "overseas" && payMethod === "paypal" ) {
+			$scope.paymentCosts = $scope.salesPrice / paymentOptions.paypal.overseas;
+			$scope.paymentPercentage = paymentOptions.paypal.overseas;
+		} else if ( location === "overseas" && payMethod === "direct" ) {
+			$scope.paymentCosts = $scope.salesPrice / paymentOptions.direct.overseas;
+			$scope.paymentPercentage = paymentOptions.direct.overseas;
+		}
+		//$scope.paymentFee = $scope.salesPrice / paymentOptions. + payMethod + . + location;
 	};
 
-	// getPaymentFee = function() {
-	// 	$scope.paymentFee
-	// };
-
-	getTotalCosts = function() {
-		$scope.totalCosts = $scope.printCosts + $scope.postageCosts + $scope.etsyFee + listingFee + $scope.paymentFee;
+	calcTotalCosts = function() {
+		$scope.totalCosts = $scope.printCosts + $scope.postageCosts + $scope.etsyCosts + $scope.paymentCosts + listingFee;
 	};
 
 	calcProfit = function() {
 		$scope.profit = $scope.salesPrice - $scope.totalCosts;
 	};
 
-	// on change, update totalCosts and recalculate profit
+	// on click, update paymentFee and totalCosts, then recalculate profit.
+	$scope.calculate = function() {
+		calcPaymentFee($scope.shippingLocation, $scope.payMethod);
+		calcTotalCosts();
+		calcProfit();
+	};
 
   });
