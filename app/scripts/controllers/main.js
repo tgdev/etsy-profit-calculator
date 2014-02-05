@@ -43,30 +43,29 @@ angular.module('etsyProfitCalculatorApp')
 	
 	// App functions
 	//=====================================
-	calcPaymentFee = function(location, payMethod) {
-		if ( location === "local" && payMethod === "paypal" ) {
+	$scope.calcPaymentFee = function() {
+		if ( $scope.shippingLocation === "local" && $scope.payMethod === "paypal" ) {
 			$scope.paymentCosts = $scope.salesPrice / paymentOptions.paypal.local;
 			$scope.paymentPercentage = paymentOptions.paypal.local;
-		} else if ( location === "local" && payMethod === "direct" ) {
+		} else if ( $scope.shippingLocation === "local" && $scope.payMethod === "direct" ) {
 			$scope.paymentCosts = $scope.salesPrice / paymentOptions.direct.local;
 			$scope.paymentPercentage = paymentOptions.direct.local;
-		} else if ( location === "overseas" && payMethod === "paypal" ) {
+		} else if ( $scope.shippingLocation === "overseas" && $scope.payMethod === "paypal" ) {
 			$scope.paymentCosts = $scope.salesPrice / paymentOptions.paypal.overseas;
 			$scope.paymentPercentage = paymentOptions.paypal.overseas;
-		} else if ( location === "overseas" && payMethod === "direct" ) {
+		} else if ( $scope.shippingLocation === "overseas" && $scope.payMethod === "direct" ) {
 			$scope.paymentCosts = $scope.salesPrice / paymentOptions.direct.overseas;
 			$scope.paymentPercentage = paymentOptions.direct.overseas;
 		}
-		//$scope.paymentFee = $scope.salesPrice / paymentOptions. + payMethod + . + location;
 	};
 
-	calcTotalCosts = function() {
-		$scope.totalCosts = $scope.printCosts + $scope.postageCosts + $scope.etsyCosts + $scope.paymentCosts + listingFee;
-	};
+	// var calcTotalCosts: function() {
+	// 	$scope.totalCosts = $scope.printCosts + $scope.postageCosts + $scope.etsyCosts + $scope.paymentCosts + listingFee;
+	// };
 
-	calcProfit = function() {
-		$scope.profit = $scope.salesPrice - $scope.totalCosts;
-	};
+	// var calcProfit: function() {
+	// 	$scope.profit = $scope.salesPrice - $scope.totalCosts;
+	// };
 
 	// on click, update paymentFee and totalCosts, then recalculate profit.
 	$scope.calculate = function() {

@@ -7,62 +7,75 @@
   <p>Got a new item you want to list on your Etsy store but get all confused when it comes to figuring out how much you'll make after production costs and fees?</p>
   <p>Try out the calculator below!</p>
 
-  <p><em>Note: The Absorb postage is optional input for people that take some of the cost from postage and put it against the item's profit so postage appears lower to their customers.</em></p>
+  <p class="bg-warning">Note: The Absorb postage is optional input for people that take some of the cost from postage and put it against the item's profit so postage appears lower to their customers.</p>
 
-  <form name="etsyForm" data-ng-controller="MainCtrl">
-    <div class="row">
-      <label for="salesPrice">Sales Price</label>
-      <input type="text" name="salesPrice" data-ng-model="salesPrice" />  
-    </div>
+  <form class="form-horizontal" role="form" name="etsyForm" data-ng-controller="MainCtrl">
+      <div class="form-group">
+        <label for="salesPrice">Sales Price</label>
+        <input type="text" name="salesPrice" class="form-control" data-ng-model="salesPrice" />  
+      </div>
 
-    <div class="row">
-      <label for="shippingLocation">Shipping Location</label>
-      <input type="radio" ng-model="shippingLocation" value="local">Same Country<br/>
-      <input type="radio" ng-model="shippingLocation" value="overseas">Overseas<br/>
-    </div>
+      <fieldset>
+        <legend>Shipping Location</legend>
+        <div class="radio">
+          <label>
+            <input type="radio" data-ng-model="shippingLocation" value="local" data-ng-onchange="calcPaymentFee()" checked="checked">Same Country
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" data-ng-model="shippingLocation" value="overseas">Overseas
+          </label>
+        </div>
+      </fieldset>
 
-    <div class="row">
-      <label for="payMethod">Payment Method</label>
-      <input type="radio" ng-model="payMethod" value="paypal">Paypal<br/>
-      <input type="radio" ng-model="payMethod" value="direct">Direct Checkout<br/>
-    </div>
-
+      <fieldset>
+        <legend>Payment Method</legend>
+        <div class="radio">
+          <label>
+            <input type="radio" data-ng-model="payMethod" value="paypal" data-ng-onchange="calcPaymentFee()">Paypal  
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" data-ng-model="payMethod" value="direct">Direct Checkout</label>
+        </div>  
+      </fieldset>
+    
     <fieldset>
       <legend>Costs</legend>
       
-      <div class="row">
+      <div class="form-group">
         <label for="printCosts">Printing</label>
-        <input type="text" name="printCosts" data-ng-model="printCosts" />  
+        <input type="text" name="printCosts" class="form-control" data-ng-model="printCosts" />  
       </div>
       
-      <div class="row">
+      <div class="form-group">
         <label for="postageCosts">Absorbed Postage</label>
-        <input type="text" name="postageCosts" data-ng-model="postageCosts" />  
+        <input type="text" name="postageCosts" class="form-control" data-ng-model="postageCosts" />  
       </div>
 
-      <div class="row">
+      <div class="form-group">
         <p class="label">Etsy Fee</p>
         <p><span data-ng-bind="etsyCosts | currency"></span> (<span data-ng-bind="etsyPercentage | percentage"></span>)</p>
       </div>
 
-      <div class="row">
+      <div class="form-group">
         <p class="label">Listing Fee</p>
         <p data-ng-bind="listingCosts | currency"></p>
       </div>
       
-      <div class="row">
+      <div class="form-group">
         <p class="label">Payment Processing Fee</p>
         <p <span data-ng-bind="paymentCosts | currency"></span> (<span data-ng-bind="paymentPercentage | percentage"></span>)</p>
       </div>
 
-      <div class="row">
+      <div class="">
         <p>Profit earned</p>
         <p data-ng-bind="profit | currency"></p>
       </div>
 
-      <div class="row">
-        <button data-ng-click="calculate()">Calculate Profit</button>
-      </div>
+      <button class="btn btn-lg btn-primary" data-ng-click="calculate()">Calculate Profit</button>
 
     </fieldset>
     
