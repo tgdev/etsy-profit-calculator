@@ -19,12 +19,14 @@
         <legend>Shipping Location</legend>
         <div class="radio">
           <label>
-            <input type="radio" data-ng-model="shippingLocation" value="local" data-ng-onchange="calcPaymentFee()" checked="checked">Same Country
+            <input type="radio" data-ng-model="shippingLocation" value="local" checked="checked" />
+            Same Country
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" data-ng-model="shippingLocation" value="overseas">Overseas
+            <input type="radio" data-ng-model="shippingLocation" value="overseas" />
+            Overseas
           </label>
         </div>
       </fieldset>
@@ -33,12 +35,15 @@
         <legend>Payment Method</legend>
         <div class="radio">
           <label>
-            <input type="radio" data-ng-model="payMethod" value="paypal" data-ng-onchange="calcPaymentFee()">Paypal  
+            <input type="radio" data-ng-model="payMethod" value="paypal" checked="checked" />
+            Paypal  
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" data-ng-model="payMethod" value="direct">Direct Checkout</label>
+            <input type="radio" data-ng-model="payMethod" value="direct" />
+            Direct Checkout
+          </label>
         </div>  
       </fieldset>
     
