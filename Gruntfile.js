@@ -347,6 +347,28 @@ module.exports = function (grunt) {
         singleRun: true
       }
     }
+
+    // Commit and Push built code to Github Pages and/or Locally
+    buildcontrol: {
+      options: {
+        dir: 'dist',
+        commit: true,
+        push: true,
+        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+      },
+      pages: {
+        options: {
+          remote: 'https://github.com/tgdev/etsy-profit-calculator.git',
+          branch: 'gh-pages'
+        }
+      },
+      local: {
+        options: {
+          remote: '../',
+          branch: 'build'
+        }
+      }
+    }
   });
 
 
@@ -393,6 +415,12 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('deploy', [
+    'newer:jshint',
+    'build',
+    'buildcontrol:pages'
   ]);
 
   grunt.registerTask('default', [
