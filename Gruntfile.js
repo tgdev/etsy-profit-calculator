@@ -346,7 +346,7 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js',
         singleRun: true
       }
-    }
+    },
 
     // Commit and Push built code to Github Pages and/or Locally
     buildcontrol: {
