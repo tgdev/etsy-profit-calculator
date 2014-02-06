@@ -1,122 +1,108 @@
 
-<div class="off-canvas-wrap">
-  <div class="inner-wrap">
-    <div class="header" role="banner">
-      <div class="row">
-        <nav class="tab-bar">
-          <section class="left tab-bar-section">
-            <h1 class="title">Etsy Profit Calculator</h1>
-          </section>
-          <section class="right-small">
-            <a class="right-off-canvas-toggle menu-icon"><span></span></a>
-          </section>
-        </nav>
-        <aside class="right-off-canvas-menu">
-          <ul class="off-canvas-list">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-          </ul>
-        </aside>
-      </div>
+<div class="header" role="banner">
+  <div class="row">
+    <div class="left">
+      <a href="/">
+        <h1 class="title">Etsy Profit Calculator</h1>
+      </a>
     </div>
+    <div class="right">
+      <ul class="inline-list menu-list" role="navigation">
+        <li><a href="/about">About</a></li>
+        <li><a href="mailto:tomgillar@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- / .header -->
 
-    <section class="main-section" role="main">
-      <div class="row">
-        <p>Got a new item you want to list on your Etsy store but get all confused when it comes to figuring out how much you'll make after production costs and fees?</p>
-        <p>Try out the calculator below!</p>
+<div class="main-section" role="main">
+  <div class="row">
+    <p>Got a new item you want to list on your Etsy store but get all confused when it comes to figuring out how much you'll make after production costs and fees? <strong>Try out the calculator below!</strong></p>
 
-        <p class="panel callout">Note: The Absorb postage is optional input for people that take some of the cost from postage and put it against the item's profit so postage appears lower to their customers.</p>
+    <p class="panel callout">Note: The Absorb postage is an optional input for people that take some of the cost from postage and put it against the item's profit so postage appears lower to their customers.</p>
 
-        <form role="form" name="etsyForm" data-ng-controller="MainCtrl">
-          <fieldset>
-            <legend>Retail Price</legend>
-            <div class="row">
-              <label for="salesPrice">Price</label>
-              <input type="number" name="salesPrice" data-ng-model="salesPrice" data-ng-change="calcEtsyFee()" />  
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Shipping Location</legend>
-            <div class="radio">
-              <label>
-                <input type="radio" name="shipping-location" data-ng-model="shippingLocation" value="local" />
-                Same Country
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="shipping-location" data-ng-model="shippingLocation" value="overseas" data-ng-change="calcPaymentFee()" />
-                Overseas
-              </label>
-            </div>
-          </fieldset>
+    <form role="form" name="etsyForm" data-ng-controller="MainCtrl">
+      
+      <fieldset>
+        <legend>Retail Price</legend>
+        <div class="row">
+          <label for="salesPrice">Price</label>
+          <input type="number" name="salesPrice" data-ng-model="salesPrice" data-ng-change="calcFees()" />  
+        </div>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Shipping Location</legend>
+        <div>
+          <input type="radio" name="shippingLocation" id="locationLocal" data-ng-model="shippingLocation" value="local" data-ng-change="calcPaymentFee()"><label for="locationLocal">Same Country</label>
+          <input type="radio" name="shippingLocation" id="locationOverseas" data-ng-model="shippingLocation" value="overseas" data-ng-change="calcPaymentFee()"><label for="locationOverseas">Overseas</label>
+        </div>
+      </fieldset>
 
-          <fieldset>
-            <legend>Payment Method</legend>
-            <div class="radio">
-              <label>
-                <input type="radio" name="pay-method" data-ng-model="payMethod" value="paypal" data-ng-change="calcPaymentFee()" />
-                Paypal  
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="pay-method" data-ng-model="payMethod" value="direct" data-ng-change="calcPaymentFee()" />
-                Direct Checkout
-              </label>
-            </div>  
-          </fieldset>
+      <fieldset>
+        <legend>Payment Method</legend>
+        <div>
+          <input type="radio" name="payMethod" id="methodPaypal" data-ng-model="payMethod" value="paypal" data-ng-change="calcPaymentFee()"><label for="methodPaypal">Paypal</label>
+          <input type="radio" name="payMethod" id="methodDirect" data-ng-model="payMethod" value="direct" data-ng-change="calcPaymentFee()"><label for="methodDirect">Direct Checkout</label>
+        </div>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Costs</legend>
+        
+        <div class="row">
+          <div class="small-12 large-6 columns">
+            <label for="printCosts">Printing</label>
+            <input type="number" name="printCosts" data-ng-model="printCosts" />    
+          </div>
+          <div class="small-12 large-6 columns">
+            <label for="postageCosts">Absorbed Postage</label>
+            <input type="number" name="postageCosts" data-ng-model="postageCosts" />  
+          </div>
           
-          <fieldset>
-            <legend>Costs</legend>
-            
-            <div class="row">
-              <label for="printCosts">Printing</label>
-              <input type="number" name="printCosts" data-ng-model="printCosts" />  
-            </div>
-            
-            <div class="row">
-              <label for="postageCosts">Absorbed Postage</label>
-              <input type="number" name="postageCosts" data-ng-model="postageCosts" />  
-            </div>
-
-            <div class="row">
+        </div>
+        
+        <div class="col-section-x3">
+          <div class="row">
+            <div class="small-12 large-4 columns">
               <label>Etsy Fee</label>
-              <p><span data-ng-bind="etsyCosts | currency"></span> (<span data-ng-bind="etsyPercentage"></span>%)</p>
+              <p><span data-ng-bind="etsyCosts | currency"></span> (<span data-ng-bind="etsyPercentage | percentage"></span>)</p>
             </div>
-
-            <div class="row">
+            <div class="small-12 large-4 columns">
               <label>Listing Fee</label>
               <p data-ng-bind="listingCosts | currency"></p>
             </div>
-            
-            <div class="row">
+            <div class="small-12 large-4 columns">
               <label>Payment Processing Fee</label>
-              <p <span data-ng-bind="paymentCosts | currency"></span> ({{paymentPercentage}} %)</p>
+              <p><span data-ng-bind="paymentCosts | currency"></span> (<span data-ng-bind="paymentPercentage | percentage"></span>)</p>
             </div>
-
-            <!-- <div class="row">
-              <label>TOTAL COSTS</label>
-              {{costs() | currency}}
-            </div> -->
-
-            <div class="row panel">
-              <h3>Profit earned</h3>
+          </div>  
+        </div>
+        
+        <div class="row">
+          <div class="small-12 large-6 columns">
+            <div class="panel">
+              <h3>Total Costs</h3>
+              <p data-ng-bind="costs() | currency"></p>
+            </div>
+          </div>
+          <div class="small-12 large-6 columns">
+            <div class="panel callout">
+              <h3>Profit Earned</h3>
               <p data-ng-bind="profit() | currency"></p>
             </div>
+          </div>
+        </div>
+      </fieldset>
 
-            <!-- <button class="btn btn-lg btn-primary" data-ng-click="calculate()">Calculate Profit</button> -->
-
-          </fieldset>
-          
-        </form>
-      </div>
-    </section>
+    </form>
   </div>
 </div>
 
 <div class="footer" role="contentInfo">
   <div class="row">
     <p>&copy; 2014 <a href="http://github.com/tgdev" target="_blank">TG DEV</a></p>
+    <small>This litle webapp is in no way affiliated with Etsy.</small>
   </div>
 </div>

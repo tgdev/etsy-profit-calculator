@@ -6,27 +6,22 @@ angular.module('etsyProfitCalculatorApp')
     //set constants
     //=====================================
     var costs = 0.0,
-		paymentOptions = {
-			paypal : {
-				local : 2.3,
-				overseas : 3.4
-			},
-			direct : {
-				local: 3.5,
-				overseas: 4.0
-			}
-		};
+    	etsyFee = 0.035, // 3.5%
+    	paypalLocal = 0.023, //2.3%
+    	paypalOverseas = 0.034, // 3.4%
+    	directLocal = 0.035, // 3.5%
+    	directOverseas = 0.04; // 4.0%
 
 
 	// initialise view properties
 	//=====================================
 	$scope.salesPrice = 0.0;
-	$scope.shippingLocation = '';
-	$scope.payMethod = '';
+	$scope.shippingLocation = 'local';
+	$scope.payMethod = 'paypal';
 
 	//Percentages
-	$scope.etsyPercentage = 3.5;
-	$scope.paymentPercentage = 0.0;
+	$scope.etsyPercentage = etsyFee;
+	$scope.paymentPercentage = paypalLocal;
 
 	
 	// Production costs
@@ -42,46 +37,52 @@ angular.module('etsyProfitCalculatorApp')
 	// App functions
 	//=====================================
 	$scope.calcEtsyFee = function(){
-		$scope.etsyCosts = $scope.salesPrice / ($scope.etsyPercentage * 100);
+		$scope.etsyCosts = etsyFee *  $scope.salesPrice;
+		$scope.etsyPercentage = etsyFee;
 	};
 
 	$scope.calcPaymentFee = function() {
 
 		if ( $scope.shippingLocation === 'local' && $scope.payMethod === 'paypal' ) {
 
-			$scope.paymentCosts = $scope.salesPrice / (paymentOptions.paypal.local * 100);
+			$scope.paymentCosts = paypalLocal * $scope.salesPrice;
 			
-			$scope.paymentPercentage = paymentOptions.paypal.local;
+			$scope.paymentPercentage = paypalLocal;
 			
-			console.log('paypal - local (2.3%): ', $scope.paymentPercentage);
+			// console.log('paypal - local (2.3%): ', $scope.paymentPercentage);
 		}
 
 		else if ( $scope.shippingLocation === 'overseas' && $scope.payMethod === 'paypal' ) {
 			
-			$scope.paymentCosts = $scope.salesPrice / (paymentOptions.paypal.overseas * 100);
+			$scope.paymentCosts = paypalOverseas * $scope.salesPrice;
 			
-			$scope.paymentPercentage = paymentOptions.paypal.overseas;
+			$scope.paymentPercentage = paypalOverseas;
 
-			console.log('paypal - overseas (3.4%): ', $scope.paymentPercentage);
+			// console.log('paypal - overseas (3.4%): ', $scope.paymentPercentage);
 		}
 
 		else if ( $scope.shippingLocation === 'local' && $scope.payMethod === 'direct' ) {
 			
-			$scope.paymentCosts = $scope.salesPrice / (paymentOptions.direct.local * 100);
+			$scope.paymentCosts = directLocal * $scope.salesPrice;
 			
-			$scope.paymentPercentage = paymentOptions.direct.local;
+			$scope.paymentPercentage = directLocal;
 			
-			console.log('direct - local (3.5%): ', $scope.paymentPercentage);
+			// console.log('direct - local (3.5%): ', $scope.paymentPercentage);
 		}
 
 		else if ( $scope.shippingLocation === 'overseas' && $scope.payMethod === 'direct' ) {
 			
-			$scope.paymentCosts = $scope.salesPrice / (paymentOptions.direct.overseas * 100);
+			$scope.paymentCosts = directOverseas * $scope.salesPrice;
 			
-			$scope.paymentPercentage = paymentOptions.direct.overseas;
+			$scope.paymentPercentage = directOverseas;
 			
-			console.log('direct - overseas: (4%)', $scope.paymentPercentage);
+			// console.log('direct - overseas: (4%)', $scope.paymentPercentage);
 		}
+	};
+
+	$scope.calcFees = function() {
+		$scope.calcEtsyFee();
+		$scope.calcPaymentFee();
 	};
 
 	$scope.costs = function() {
