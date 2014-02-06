@@ -1,0 +1,24 @@
+{
+  "name": "components-foundation",
+  "description": "The most advanced responsive front-end framework in the world.",
+  "version": "5.0.3",
+  "main": [
+    "js/foundation.min.js",
+    "css/foundation.css"
+  ],
+  "dependencies": {
+    "jquery": ">= 2.0.0",
+    "modernizr": ">= 2.6.2",
+    "normalize-css": "2.1.2"
+  },
+  "homepage": "https://github.com/components/foundation",
+  "_release": "5.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "5.0.3",
+    "commit": "67c79753cb3eaacdca0898f6add704507fbbc9b4"
+  },
+  "_source": "git://github.com/components/foundation.git",
+  "_target": "~5.0.3",
+  "_originalSource": "components-foundation"
+}
