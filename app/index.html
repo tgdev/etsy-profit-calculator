@@ -16,24 +16,40 @@
     <!-- build:js({.tmp,app}) scripts/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
+    <!--[if lt IE 9]>
+      <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <![endif]-->
   </head>
   <body data-ng-app="etsyProfitCalculatorApp">
     <!--[if lte IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div data-ng-include="'views/main.html'" data-ng-controller="MainCtrl"></div>
+    <div class="header" role="banner">
+      <div class="row">
+        <a href="/">
+          <h1 class="title columns">Etsy Profit Calculator</h1>
+        </a>
+      </div>
+    </div>
+    <!-- / .header -->
+    
+    <div data-ng-view=""></div>
 
-    <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <![endif]-->
+    <div class="footer" role="contentInfo">
+      <div class="row">
+        <p>&copy; 2014 <a href="http://github.com/tgdev" target="_blank">TG DEV</a> | <a href="http://github.com/tgdev/etsy-profit-calculator" target="_blank">View on github</a></p>
+        <small>* This litle webapp is in no way affiliated with Etsy.</small>
+      </div>
+    </div>
+    <!-- / .footer -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/components-foundation/js/foundation/foundation.js"></script>
-        <script src="bower_components/components-foundation/js/foundation/foundation.offcanvas.js"></script>
+        <script src="bower_components/components-foundation/js/foundation/foundation.accordion.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
     <script src="scripts/filters/percentage.js"></script>

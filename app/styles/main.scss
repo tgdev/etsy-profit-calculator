@@ -9,6 +9,25 @@ $blue: #0192b5;
 
 $brand-font: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
 
+
+// Type
+.h1 {
+    @extend h1;
+}
+
+.h2 {
+    @extend h2;
+}
+.h3 {
+    @extend h3;
+}
+
+.h4 {
+    @extend h4;
+}
+
+//Layout
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -29,6 +48,10 @@ $brand-font: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, seri
 .main-section {
     padding-top: 20px;
     background-color: $grey;
+    
+    img {
+        padding-bottom: 20px;
+    }
 }
 
 .footer {
@@ -36,14 +59,6 @@ $brand-font: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, seri
     color: #777;
     border-top: 1px solid $grey-dark;
     text-align: center;
-}
-
-fieldset {
-    background-color: #FFF; 
-}
-
-label {
-    color: $blue;
 }
 
 .col-section-x3 {
@@ -54,11 +69,24 @@ label {
     text-align: center;
 }
 
-.menu-list {
-    display:none;
-    margin-bottom: 0;
-    a {
-        padding: 0 10px;
-        line-height: 72px;
-    }
+// Forms
+
+fieldset {
+    background-color: #FFF; 
+}
+
+label, .form-label {
+    color: $blue;
+}
+
+.form-label {
+    font-size: .875rem;
+    cursor: pointer;
+    display: block;
+    font-weight: 400;
+    margin-bottom: .5rem;
+}
+
+input[type="radio"] + label {
+    color: #222;
 }
