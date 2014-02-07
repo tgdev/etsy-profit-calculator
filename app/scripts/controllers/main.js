@@ -3,15 +3,15 @@
 angular.module('etsyProfitCalculatorApp')
   .controller('MainCtrl', function ($scope) {
 
-    //set constants
-    //=====================================
-    var costs = 0.0,
-    	fees = 0.0,
-    	etsyFee = 0.035, // 3.5%
-    	paypalLocal = 0.023, //2.3%
-    	paypalOverseas = 0.034, // 3.4%
-    	directLocal = 0.035, // 3.5%
-    	directOverseas = 0.040; // 4.0%
+	//set constants
+	//=====================================
+	var costs = 0.0,
+		fees = 0.0,
+		etsyFee = 0.035, // 3.5%
+		paypalLocal = 0.023, //2.3%
+		paypalOverseas = 0.034, // 3.4%
+		directLocal = 0.035, // 3.5%
+		directOverseas = 0.040; // 4.0%
 
 
 	// initialise view properties
@@ -97,8 +97,8 @@ angular.module('etsyProfitCalculatorApp')
 	};
 
 	$scope.profit = function() {
-        var profit = $scope.salesPrice - (costs + fees);
-        return profit;
-    };
+		var profit = $scope.salesPrice - (costs + fees);
+		return profit;
+	};
 
 });
