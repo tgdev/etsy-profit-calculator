@@ -26,6 +26,10 @@ $brand-font: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, seri
     @extend h4;
 }
 
+.small {
+    @extend small;
+}
+
 //Layout
 
 .browsehappy {
