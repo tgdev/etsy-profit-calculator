@@ -18,8 +18,8 @@ angular.module('etsyProfitCalculatorApp', [
 })
 .run(function($rootScope, $timeout) {
 	$rootScope.$on('$viewContentLoaded', function () {
-		$timeout(function(){        
+		$timeout(function(){
 			$(document).foundation();
-		},300)
+		},300);
 	});
 });
