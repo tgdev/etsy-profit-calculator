@@ -17,9 +17,9 @@ angular.module('etsyProfitCalculatorApp', [
 	});
 })
 .run(function($rootScope, $timeout) {
-     $rootScope.$on('$viewContentLoaded', function () {
-            $timeout(function(){        
-            	$(document).foundation();
-            },300)
-        });
+	$rootScope.$on('$viewContentLoaded', function () {
+		$timeout(function(){        
+			$(document).foundation();
+		},300)
+	});
 });
