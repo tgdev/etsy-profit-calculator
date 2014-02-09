@@ -15,4 +15,11 @@ angular.module('etsyProfitCalculatorApp', [
 	.otherwise({
 		redirectTo: '/'
 	});
+})
+.run(function($rootScope, $timeout) {
+     $rootScope.$on('$viewContentLoaded', function () {
+            $timeout(function(){        
+            	$(document).foundation();
+            },300)
+        });
 });
